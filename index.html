@@ -1310,8 +1310,7 @@
             setTimeout(() => {
                 document.getElementById("thankYouModal").style.display = "none";
             }, 3000);
-                            alert('Thank you! Your request has been submitted.');
-                            form.reset();
+                            
                         } else {
                             throw new Error('Submission failed');
                         }
@@ -1320,9 +1319,7 @@
                         console.error(error);
                     }
                 });
-            document.querySelector(".close").addEventListener("click", function() {
-    document.getElementById("thankYouModal").style.display = "none";
-});
+            
 document.querySelector(".close").onclick = function() {
     document.getElementById("thankYouModal").style.display = "none";
 };
