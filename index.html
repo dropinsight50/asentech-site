@@ -1007,17 +1007,167 @@
     </div>
   </section>
   <!-- Call to Action -->
-  <section id="contact" class="cta-section">
-    <div class="container cta-content">
-      <h2>Ready to Automate Your Business?</h2>
-      <p>Get in touch with our team of AI experts to discover how intelligent automation can transform your operations and drive growth. Medaase for considering AsenTech as your automation partner.</p>
-      <form<div class="form-group"><label for="industry">Industry</label><select name="industry" id="industry" class="form-control"><option value="" disabled selected>Select your industry</option><option value="hospitality">Hospitality</option><option value="retail">Retail & E-commerce</option><option value="logistics">Logistics</option><option value="financial">Financial Services</option></select></div> class="cta-form">
-        <input type="text" placeholder="Your Name">
-        <input type="email" placeholder="Your Email">
-        <button type="submit">Get Started</button>
-      </form>
+  
+    <div id="contactFormContainer">
+        <form id="contactForm" onsubmit="handleFormSubmit(event)" action="#" method="POST">
+            <div class="form-field">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-field">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-field">
+                <label for="company">Company:</label>
+                <input type="text" id="company" name="company">
+            </div>
+            <div class="form-field">
+                <label for="industry">Industry:</label>
+                <select id="industry" name="industry" required>
+                    <option value="" disabled selected>Select your industry</option>
+                    <option value="hospitality">Hospitality</option>
+                    <option value="retail">Retail & E-commerce</option>
+                    <option value="logistics">Logistics</option>
+                    <option value="financial">Financial Services</option>
+                </select>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+        <div id="thankYouPopup">
+            <h2>Thank You!</h2>
+            <p id="popupMessage">Hello <span id="userName">[Name]</span>, thank you for your message.</p>
+            <button id="closePopup" onclick="closePopup()">Close</button>
+        </div>
     </div>
-  </section></section>
+    <style>
+        /* CSS for form styling and animations */
+        #contactFormContainer {
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            opacity: 0;
+            transform: translateY(-20px);
+            animation: fadeIn 0.5s forwards, slideDown 0.5s forwards 0.2s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .form-field {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"], input[type="email"], select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #thankYouPopup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            z-index: 1000;
+            display: none;
+            animation: fadeIn 0.3s;
+        }
+
+        #closePopup {
+            margin-top: 15px;
+            background-color: #f44336;
+        }
+
+        #closePopup:hover {
+            background-color: #d32f2f;
+        }
+    </style>
+    <script>
+        // JavaScript for form handling, animations, and popup
+        function handleFormSubmit(event) {
+            event.preventDefault();
+
+            // Get form values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const company = document.getElementById('company').value;
+            const industry = document.getElementById('industry').value;
+
+            // Personalize popup message
+            document.getElementById('userName').textContent = name;
+
+            // Show thank you popup
+            document.getElementById('thankYouPopup').style.display = 'block';
+
+            // Send data to webhook (replace 'https://your-webhook-url.com/submit' with actual URL)
+            const formData = {
+                name: name,
+                email: email,
+                company: company,
+                industry: industry
+            };
+
+            fetch('https://your-webhook-url.com/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Webhook submission failed');
+                }
+                return response.json();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                // Show error to user if needed
+                alert('There was an error submitting the form. Please try again later.');
+            });
+        }
+
+        function closePopup() {
+            document.getElementById('thankYouPopup').style.display = 'none';
+        }
+    </script>
+    </section>
   <!-- Footer -->
   <footer>
     <div class="container">
