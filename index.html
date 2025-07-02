@@ -1106,6 +1106,15 @@
           <option value="government">Government & Public Sector</option>
           <option value="other">Other</option>
         </select>
+        <select name="services" multiple required style="min-height: 90px;">
+          <option value="Process Automation">Process Automation</option>
+          <option value="AI Consulting">AI Consulting</option>
+          <option value="Data Analytics">Data Analytics</option>
+          <option value="Chatbot Solutions">Chatbot Solutions</option>
+          <option value="Custom AI Development">Custom AI Development</option>
+          <option value="AI Training">AI Training</option>
+        </select>
+        <textarea name="message" placeholder="Tell us about your unique needs..." rows="4" style="resize:vertical;"></textarea>
         <button type="submit">Get Started</button>
       </form>
     </div>
@@ -1225,12 +1234,19 @@
         const formData = new FormData(contactForm);
         const name = formData.get('name');
         const industry = formData.get('industry');
+        const services = formData.getAll('services');
+        const message = formData.get('message');
         const webhookUrl = 'https://evolution-n8n.kojikp.easypanel.host/webhook/7bcb0c90-4cdf-4daf-b8c6-174f49626a50';
         
         // Convert formData to JSON
         const data = {};
         formData.forEach((value, key) => {
-          data[key] = value;
+          if (key === 'services') {
+            if (!data[key]) data[key] = [];
+            data[key].push(value);
+          } else {
+            data[key] = value;
+          }
         });
         
         try {
