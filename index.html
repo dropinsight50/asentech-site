@@ -497,39 +497,94 @@
       opacity: 0.9;
     }
     .cta-form {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 15px;
-      max-width: 600px;
+      max-width: 500px;
       margin: 0 auto;
+      background: rgba(255,255,255,0.95);
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+      padding: 40px 30px 30px 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      animation: fadeInUp 1s cubic-bezier(.23,1.01,.32,1) both;
     }
-    .cta-form input, .cta-form select {
-      padding: 15px;
-      border: none;
-      border-radius: 5px;
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .form-group {
+      position: relative;
+      margin-bottom: 8px;
+      width: 100%;
+    }
+    .cta-form label {
+      position: absolute;
+      top: 16px;
+      left: 18px;
+      color: #888;
+      font-size: 15px;
+      background: transparent;
+      pointer-events: none;
+      transition: 0.2s cubic-bezier(.23,1.01,.32,1);
+      padding: 0 4px;
+    }
+    .cta-form input:focus + label,
+    .cta-form input:not(:placeholder-shown) + label,
+    .cta-form select:focus + label,
+    .cta-form select:not([value=""]) + label,
+    .cta-form textarea:focus + label,
+    .cta-form textarea:not(:placeholder-shown) + label {
+      top: -10px;
+      left: 12px;
+      font-size: 12px;
+      color: var(--asen-teal);
+      background: #fff;
+    }
+    .cta-form input,
+    .cta-form select,
+    .cta-form textarea {
+      width: 100%;
+      padding: 16px 18px 16px 18px;
+      border: 1.5px solid #e0e0e0;
+      border-radius: 7px;
       font-family: 'Open Sans', sans-serif;
       font-size: 16px;
-      background-color: white;
+      background: #fff;
       color: var(--charcoal);
+      margin-bottom: 0;
+      transition: border-color 0.2s;
     }
-    .cta-form input:focus, .cta-form select:focus {
-      outline: 2px solid var(--growth-lime);
+    .cta-form input:focus,
+    .cta-form select:focus,
+    .cta-form textarea:focus {
+      outline: none;
+      border-color: var(--asen-teal);
+      box-shadow: 0 2px 8px rgba(0,128,128,0.07);
+    }
+    .cta-form select {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background-image: url('data:image/svg+xml;utf8,<svg fill="%23008080" height="20" viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+      background-repeat: no-repeat;
+      background-position: right 18px center;
+      background-size: 18px 18px;
+    }
+    .cta-form textarea {
+      min-height: 90px;
+      resize: vertical;
     }
     .cta-form button {
-      grid-column: 1 / -1;
-      padding: 15px 30px;
-      background-color: var(--growth-lime);
-      color: white;
-      border: none;
-      border-radius: 5px;
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 600;
-      font-size: 16px;
-      cursor: pointer;
-      transition: background-color 0.3s;
+      margin-top: 10px;
+      font-size: 18px;
+      padding: 15px 0;
+      border-radius: 7px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      box-shadow: 0 2px 8px rgba(0,128,128,0.07);
     }
-    .cta-form button:hover {
-      background-color: #8ab12f;
+    @media (max-width: 576px) {
+      .cta-form { padding: 25px 8px 20px 8px; }
     }
     .popup-overlay {
       position: fixed;
@@ -665,7 +720,6 @@
     @media (max-width: 992px) {
       .about-content { grid-template-columns: 1fr; }
       .ghana-circuit { width: 50%; opacity: 0.5; }
-      .cta-form { grid-template-columns: 1fr; }
     }
     @media (max-width: 768px) {
       .header-container { padding: 0 20px; }
@@ -694,10 +748,7 @@
       .hero-buttons a { width: 100%; text-align: center; }
       .section-title h2 { font-size: 28px; }
       .about-text h2 { font-size: 28px; }
-      .tab-button { margin: 0 5px 10px; padding: 10px 15px; font-size: 14px; }
-      .testimonial-card { padding: 30px 20px; }
-      .cta-content h2 { font-size: 30px; }
-      .thank-you-popup { padding: 30px 20px; }
+      .cta-form { padding: 25px 8px 20px 8px; }
     }
   </style>
 </head>
@@ -1088,36 +1139,52 @@
       <h2>Ready to Automate Your Business?</h2>
       <p>Get in touch with our team of AI experts to discover how intelligent automation can transform your operations and drive growth. Medaase for considering AsenTech as your automation partner.</p>
       <form class="cta-form" id="contactForm">
-        <input type="text" name="name" placeholder="Your Name" required>
-        <input type="email" name="email" placeholder="Your Email" required>
-        <input type="tel" name="phone" placeholder="Your Phone Number" required>
-        <select name="industry" required>
-          <option value="">Select Your Industry</option>
-          <option value="hospitality">Hospitality & Tourism</option>
-          <option value="retail">Retail & E-commerce</option>
-          <option value="logistics">Logistics & Transportation</option>
-          <option value="finance">Banking & Finance</option>
-          <option value="healthcare">Healthcare & Medical</option>
-          <option value="manufacturing">Manufacturing & Production</option>
-          <option value="agriculture">Agriculture & Agribusiness</option>
-          <option value="education">Education & Training</option>
-          <option value="realestate">Real Estate & Property</option>
-          <option value="technology">Technology & Software</option>
-          <option value="government">Government & Public Sector</option>
-          <option value="other">Other</option>
-        </select>
-        <label for="service" style="font-weight:600; margin-top:10px;">Service of Interest</label>
-        <select name="service" id="service" required>
-          <option value="">Select a Service</option>
-          <option value="Process Automation">Process Automation</option>
-          <option value="AI Consulting">AI Consulting</option>
-          <option value="Data Analytics">Data Analytics</option>
-          <option value="Chatbot Solutions">Chatbot Solutions</option>
-          <option value="Custom AI Development">Custom AI Development</option>
-          <option value="AI Training">AI Training</option>
-        </select>
-        <label for="message" style="font-weight:600; margin-top:10px;">Message</label>
-        <textarea name="message" id="message" placeholder="Tell us about your unique needs..." rows="4" style="resize:vertical;"></textarea>
+        <div class="form-group">
+          <input type="text" name="name" id="name" placeholder=" " required>
+          <label for="name">Your Name</label>
+        </div>
+        <div class="form-group">
+          <input type="email" name="email" id="email" placeholder=" " required>
+          <label for="email">Your Email</label>
+        </div>
+        <div class="form-group">
+          <input type="tel" name="phone" id="phone" placeholder=" " required>
+          <label for="phone">Your Phone Number</label>
+        </div>
+        <div class="form-group">
+          <select name="industry" id="industry" required>
+            <option value="" disabled selected hidden></option>
+            <option value="hospitality">Hospitality & Tourism</option>
+            <option value="retail">Retail & E-commerce</option>
+            <option value="logistics">Logistics & Transportation</option>
+            <option value="finance">Banking & Finance</option>
+            <option value="healthcare">Healthcare & Medical</option>
+            <option value="manufacturing">Manufacturing & Production</option>
+            <option value="agriculture">Agriculture & Agribusiness</option>
+            <option value="education">Education & Training</option>
+            <option value="realestate">Real Estate & Property</option>
+            <option value="technology">Technology & Software</option>
+            <option value="government">Government & Public Sector</option>
+            <option value="other">Other</option>
+          </select>
+          <label for="industry">Industry</label>
+        </div>
+        <div class="form-group">
+          <select name="service" id="service" required>
+            <option value="" disabled selected hidden></option>
+            <option value="Process Automation">Process Automation</option>
+            <option value="AI Consulting">AI Consulting</option>
+            <option value="Data Analytics">Data Analytics</option>
+            <option value="Chatbot Solutions">Chatbot Solutions</option>
+            <option value="Custom AI Development">Custom AI Development</option>
+            <option value="AI Training">AI Training</option>
+          </select>
+          <label for="service">Service of Interest</label>
+        </div>
+        <div class="form-group">
+          <textarea name="message" id="message" placeholder=" " rows="4"></textarea>
+          <label for="message">Message</label>
+        </div>
         <button type="submit">Get Started</button>
       </form>
     </div>
