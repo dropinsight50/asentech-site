@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AsenTech - AI-Powered Automation for Ghana's Growth</title>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" href="/assets/images/favicon.png">
   <style>
@@ -1402,6 +1402,17 @@
           }
         });
       });
+
+      // Force homepage reload on logo click from any page
+      const logoLink = document.querySelector('.logo a');
+      if (logoLink) {
+        logoLink.addEventListener('click', function(e) {
+          if (window.location.pathname !== '/' && window.location.pathname !== '/index.html') {
+            window.location.href = '/';
+            e.preventDefault();
+          }
+        });
+      }
     });
   </script>
 </body>
