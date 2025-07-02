@@ -1216,44 +1216,63 @@
       const popupMessage = document.getElementById('popupMessage');
       const closePopup = document.getElementById('closePopup');
       
-      contactForm.addEventListener('submit', function(e) {
+      contactForm.addEventListener('submit', async function(e) {
         e.preventDefault();
         
         const formData = new FormData(contactForm);
         const name = formData.get('name');
         const industry = formData.get('industry');
+        const webhookUrl = 'https://evolution-n8n.kojikp.easypanel.host/webhook-test/7bcb0c90-4cdf-4daf-b8c6-174f49626a50';
         
-        // Create personalized message
-        const industryNames = {
-          'hospitality': 'Hospitality & Tourism',
-          'retail': 'Retail & E-commerce',
-          'logistics': 'Logistics & Transportation',
-          'finance': 'Banking & Finance',
-          'healthcare': 'Healthcare & Medical',
-          'manufacturing': 'Manufacturing & Production',
-          'agriculture': 'Agriculture & Agribusiness',
-          'education': 'Education & Training',
-          'realestate': 'Real Estate & Property',
-          'technology': 'Technology & Software',
-          'government': 'Government & Public Sector',
-          'other': 'Other'
-        };
+        // Convert formData to JSON
+        const data = {};
+        formData.forEach((value, key) => {
+          data[key] = value;
+        });
         
-        const industryName = industryNames[industry] || industry;
-        
-        popupMessage.innerHTML = `
-          Hello <strong>${name}</strong>! Thank you for your interest in AsenTech's AI automation solutions for the ${industryName} industry. 
-          <br><br>
-          Our team will review your request and get back to you within 24 hours with tailored recommendations for your business needs.
-          <br><br>
-          Medaase for choosing AsenTech as your automation partner!
-        `;
-        
-        // Show popup
-        thankYouPopup.classList.add('active');
-        
-        // Reset form
-        contactForm.reset();
+        try {
+          const response = await fetch(webhookUrl, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+          });
+          if (!response.ok) throw new Error('Network response was not ok');
+
+          // Create personalized message
+          const industryNames = {
+            'hospitality': 'Hospitality & Tourism',
+            'retail': 'Retail & E-commerce',
+            'logistics': 'Logistics & Transportation',
+            'finance': 'Banking & Finance',
+            'healthcare': 'Healthcare & Medical',
+            'manufacturing': 'Manufacturing & Production',
+            'agriculture': 'Agriculture & Agribusiness',
+            'education': 'Education & Training',
+            'realestate': 'Real Estate & Property',
+            'technology': 'Technology & Software',
+            'government': 'Government & Public Sector',
+            'other': 'Other'
+          };
+          const industryName = industryNames[industry] || industry;
+          popupMessage.innerHTML = `
+            Hello <strong>${name}</strong>! Thank you for your interest in AsenTech's AI automation solutions for the ${industryName} industry. 
+            <br><br>
+            Our team will review your request and get back to you within 24 hours with tailored recommendations for your business needs.
+            <br><br>
+            Medaase for choosing AsenTech as your automation partner!
+          `;
+          // Show popup
+          thankYouPopup.classList.add('active');
+          // Reset form
+          contactForm.reset();
+        } catch (error) {
+          popupMessage.innerHTML = `
+            Sorry, there was a problem submitting your request. Please try again later or contact us directly at <a href="mailto:info@asentech.com">info@asentech.com</a>.
+          `;
+          thankYouPopup.classList.add('active');
+        }
       });
       
       // Close popup
