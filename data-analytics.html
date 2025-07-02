@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Analytics | AsenTech</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <style>/* (Same CSS as process-automation.html for theme consistency) */
+    :root { --asen-teal: #008080; --automation-blue: #005F99; --growth-lime: #A4C639; --charcoal: #333333; --cool-gray: #F5F5F5; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Open Sans', sans-serif; color: var(--charcoal); line-height: 1.6; background-color: var(--cool-gray); }
+    h1, h2, h3, h4, h5, h6 { font-family: 'Montserrat', sans-serif; font-weight: 700; }
+    .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+    header { background-color: white; padding: 20px 0; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); position: fixed; width: 100%; top: 0; z-index: 1000; }
+    .header-container { display: flex; justify-content: space-between; align-items: center; }
+    .logo { display: flex; align-items: center; }
+    .logo svg { height: 50px; margin-right: 10px; }
+    .logo h1 { font-size: 24px; color: var(--asen-teal); }
+    nav ul { display: flex; list-style: none; }
+    nav ul li { margin-left: 30px; }
+    nav ul a { text-decoration: none; color: var(--automation-blue); font-weight: 600; transition: color 0.3s; }
+    nav ul a:hover { color: var(--asen-teal); }
+    .cta-button { background-color: var(--growth-lime); color: white; padding: 10px 20px; border-radius: 5px; font-weight: bold; text-decoration: none; transition: background-color 0.3s; }
+    .cta-button:hover { background-color: #8ab12f; }
+    .hero { background-image: linear-gradient(135deg, rgba(0, 128, 128, 0.9), rgba(0, 95, 153, 0.9)), url('https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&w=1200&h=800&fit=crop'); background-size: cover; background-position: center; height: 60vh; display: flex; align-items: center; position: relative; overflow: hidden; margin-bottom: 60px; }
+    .hero-content { position: relative; z-index: 2; color: white; max-width: 700px; margin-left: 40px; }
+    .hero h2 { font-size: 48px; margin-bottom: 20px; line-height: 1.2; }
+    .hero p { font-size: 20px; margin-bottom: 30px; opacity: 0.95; }
+    .section { padding: 80px 0 40px 0; background: white; border-radius: 15px; box-shadow: 0 5px 30px rgba(0,0,0,0.07); margin-bottom: 40px; }
+    .section-title { text-align: center; margin-bottom: 40px; }
+    .section-title h2 { font-size: 36px; color: var(--asen-teal); margin-bottom: 15px; }
+    .section-title p { max-width: 700px; margin: 0 auto; color: var(--charcoal); }
+    .features-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px; }
+    .feature-card { background: var(--cool-gray); border-radius: 10px; padding: 30px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); display: flex; flex-direction: column; align-items: flex-start; transition: transform 0.3s, box-shadow 0.3s; }
+    .feature-card:hover { transform: translateY(-8px); box-shadow: 0 8px 24px rgba(0,0,0,0.10); }
+    .feature-icon { font-size: 36px; color: var(--asen-teal); margin-bottom: 15px; }
+    .feature-card h3 { font-size: 22px; margin-bottom: 10px; color: var(--automation-blue); }
+    .feature-card p { color: var(--charcoal); opacity: 0.9; }
+    .cta-section { text-align: center; padding: 60px 0 80px 0; background-image: linear-gradient(135deg, var(--asen-teal), var(--automation-blue)); color: white; border-radius: 15px; margin-bottom: 40px; }
+    .cta-section h2 { font-size: 32px; margin-bottom: 20px; }
+    .cta-section p { font-size: 18px; margin-bottom: 30px; opacity: 0.95; }
+    .cta-section .cta-button { font-size: 18px; padding: 15px 40px; }
+    footer { background-color: var(--charcoal); color: white; padding: 50px 0 20px; margin-top: 40px; }
+    .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 30px; }
+    .footer-column h3 { font-size: 20px; margin-bottom: 20px; color: var(--cool-gray); }
+    .footer-links { list-style: none; }
+    .footer-links li { margin-bottom: 10px; }
+    .footer-links a { color: white; text-decoration: none; opacity: 0.8; transition: opacity 0.3s; }
+    .footer-links a:hover { opacity: 1; }
+    .footer-bottom { text-align: center; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); }
+    .footer-bottom p { opacity: 0.7; font-size: 14px; }
+    @media (max-width: 992px) { .features-list { grid-template-columns: 1fr; } .hero h2 { font-size: 36px; } }
+    @media (max-width: 576px) { .hero-content { margin-left: 0; } .hero h2 { font-size: 28px; } .section-title h2 { font-size: 24px; } .cta-section h2 { font-size: 22px; } }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container header-container">
+      <div class="logo">
+        <svg width="50" height="50" viewBox="0 0 100 100">
+          <path d="M50 5 L95 50 L50 95 L5 50 Z" fill="none" stroke="#008080" stroke-width="3" />
+          <path d="M25 25 L75 25 L75 75 L25 75 Z" fill="none" stroke="#008080" stroke-width="2" />
+          <path d="M40 40 L60 40 L60 60 L40 60 Z" fill="#008080" />
+          <path d="M15 50 L25 50" stroke="#008080" stroke-width="2" />
+          <path d="M75 50 L85 50" stroke="#008080" stroke-width="2" />
+          <path d="M50 15 L50 25" stroke="#008080" stroke-width="2" />
+          <path d="M50 75 L50 85" stroke="#008080" stroke-width="2" />
+        </svg>
+        <h1>AsenTech</h1>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="index.html#services">Services</a></li>
+          <li><a href="index.html#about">About Us</a></li>
+          <li><a href="index.html#solutions">Solutions</a></li>
+          <li><a href="index.html#testimonials">Testimonials</a></li>
+          <li><a href="index.html#contact" class="cta-button">Contact Us</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h2>Data Analytics</h2>
+        <p>Transform your business data into actionable insights through advanced analytics and visualization tools.</p>
+      </div>
+    </div>
+  </section>
+  <!-- About Data Analytics -->
+  <section class="section">
+    <div class="container">
+      <div class="section-title">
+        <h2>Why Data Analytics?</h2>
+        <p>Data is the new oil, but only if you know how to use it. AsenTech's Data Analytics solutions help Ghanaian businesses unlock the power of their data—turning raw numbers into clear, actionable strategies for growth.</p>
+      </div>
+      <div class="features-list">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-chart-bar"></i></div>
+          <h3>Actionable Insights</h3>
+          <p>We turn your business data into clear, actionable insights that drive smarter decisions and better results.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-database"></i></div>
+          <h3>Advanced Analytics</h3>
+          <p>From predictive analytics to real-time dashboards, we deliver the tools you need to stay ahead of the competition.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-eye"></i></div>
+          <h3>Data Visualization</h3>
+          <p>See your business like never before with intuitive, interactive dashboards and reports.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-lock"></i></div>
+          <h3>Data Security</h3>
+          <p>Your data is valuable. We ensure it's protected, compliant, and used responsibly at every step.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- How It Works -->
+  <section class="section" style="background: var(--cool-gray);">
+    <div class="container">
+      <div class="section-title">
+        <h2>How Our Data Analytics Works</h2>
+        <p>We make data work for you, not the other way around.</p>
+      </div>
+      <div class="features-list">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-search"></i></div>
+          <h3>1. Data Assessment</h3>
+          <p>We review your current data sources, quality, and business goals to design the right analytics approach.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-cogs"></i></div>
+          <h3>2. Solution Development</h3>
+          <p>We build and deploy analytics tools, dashboards, and models tailored to your needs.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-rocket"></i></div>
+          <h3>3. Insights Delivery</h3>
+          <p>We deliver insights in clear, actionable formats—so you can make decisions with confidence.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-headset"></i></div>
+          <h3>4. Ongoing Support</h3>
+          <p>Our team provides ongoing support, training, and optimization to keep your analytics sharp and relevant.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Call to Action -->
+  <section class="cta-section">
+    <div class="container">
+      <h2>Ready to Unlock Your Data?</h2>
+      <p>Let AsenTech help you turn data into growth. Contact us today for a free consultation and see how data analytics can transform your business.</p>
+      <a href="index.html#contact" class="cta-button">Get Started</a>
+    </div>
+  </section>
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-column">
+          <h3>AsenTech</h3>
+          <p>AI-Powered Automation for Ghana's Growth. Empowering businesses with intelligent solutions that drive efficiency and innovation.</p>
+        </div>
+        <div class="footer-column">
+          <h3>Quick Links</h3>
+          <ul class="footer-links">
+            <li><a href="index.html#services">Services</a></li>
+            <li><a href="index.html#about">About Us</a></li>
+            <li><a href="index.html#solutions">Solutions</a></li>
+            <li><a href="index.html#testimonials">Testimonials</a></li>
+            <li><a href="index.html#contact">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Our Services</h3>
+          <ul class="footer-links">
+            <li><a href="process-automation.html">Process Automation</a></li>
+            <li><a href="ai-consulting.html">AI Consulting</a></li>
+            <li><a href="data-analytics.html">Data Analytics</a></li>
+            <li><a href="#">Chatbot Solutions</a></li>
+            <li><a href="#">Custom AI Development</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Contact Info</h3>
+          <ul class="footer-links">
+            <li><i class="fas fa-map-marker-alt"></i> 15 Independence Ave, Accra, Ghana</li>
+            <li><i class="fas fa-phone"></i> +233 50 123 4567</li>
+            <li><i class="fas fa-envelope"></i> info@asentech.com</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 AsenTech. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html> 
